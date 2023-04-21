@@ -23,6 +23,10 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // spotテーブルから値を取得
+        // all
+        // home blade にもっていく
+
         return view('home');
     }
 }
