@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Spot;
 
 class HomeController extends Controller
 {
@@ -23,10 +24,14 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $prefs = Spot::all();
+        // dd($prefs);
         // spotテーブルから値を取得
         // all
         // home blade にもっていく
 
-        return view('home');
+        return view('home',[
+            'prefs' => $prefs,
+        ]);
     }
 }

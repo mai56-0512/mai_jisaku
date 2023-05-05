@@ -50,9 +50,3 @@ return array(
 47 => '沖縄県'
 );
 ?>
-都道府県の select box<br/>
-<select name="prefecture">
-<?php foreach($prefecture as $key => $value){ ?>
- <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
-<?php } ?>
-</select>

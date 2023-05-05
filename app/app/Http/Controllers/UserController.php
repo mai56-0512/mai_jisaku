@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use App\Post;
+use App\Spot;
+use App\User;
 
 class UserController extends Controller
 {
@@ -13,7 +18,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('mypage');
+        $id = Auth::id();
+        $user = DB::table('posts')->where('user_id',$id)->get();
+        // dd($user);
+        return view('my_page_list',['my_user'=>$user]);
     }
 
     /**
@@ -56,7 +64,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view()
     }
 
     /**
@@ -79,6 +87,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //    
     }
 }

@@ -1,23 +1,12 @@
+投稿編集画面
+
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <a href="{{ route('posts.index')}}">茨城県</a>
-    <a href="{{ route('posts.index')}}">栃木県</a>
-    <a href="{{ route('posts.index')}}">群馬県</a>
-    <a href="{{ route('posts.index')}}">埼玉県</a>
-    <a href="{{ route('posts.index')}}">千葉県</a>
-    <a href="{{ route('posts.index')}}">東京都</a>
-    <a href="{{ route('posts.index')}}">神奈川県</a>
 
-    <div class="row justify-content-center">
-    <div class="container mt-4">
-  <div class="border p-4">
-    <h1 class="h4 mb-4 font-weight-bold">新規作成</h1>
-
-    <form action="{{ route('posts.store') }}" enctype="multipart/form-data" method="POST" id="new">
+<form action="{{ route('posts.update',$post->id) }}" enctype="multipart/form-data" method="POST" id="new">
       @csrf
-
+      @method('patch')
       <fieldset class="mb-4">
 
       <div class="form-group">
@@ -28,10 +17,11 @@
             id="name"
             type="date"
             name="date"
-            value=""
+            value="{{ $post->date }}"
             class="form-control"
           >
         </div>
+
 
         <div class="form-group">
           <label for="subject">
@@ -41,7 +31,7 @@
             id="name"
             type="text"
             name="title"
-            value=""
+            value="{{ $post->title }}"
             class="form-control"
           >
         </div>
@@ -53,7 +43,7 @@
           <textarea
             id="new"
             name="episode"
-            value=""
+            value="{{ $post->episode }}"
             class="form-control"
             rows="8"
           >
@@ -85,9 +75,10 @@
           <input
             type="text"
             name="spot_id"
-            value=""
+            value="{{ $post->spot_id }}"
             class="form-control"
           >
+        
         </div>
 
         <div class="form-group">
@@ -99,17 +90,13 @@
             type='file'
             name="image_path"
           >
+          <!-- 画像は表示されなくてOK -->
         </div>
 
-            <button type="submit" class="btn btn-primary">
-              投稿する
-            </button>
+            <input type="submit" value="更新" class="btn btn-primary">
+            <input type="reset" value="キャンセル" class="btn btn-secondary" on click='window.history.back(-1);'>
 
       </fieldset>
-    </form>
-  </div>
-</div>
+  </form>
 
-    </div>
-</div>
 @endsection
