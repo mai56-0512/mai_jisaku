@@ -25,9 +25,9 @@ class HomeController extends Controller
     public function index()
     {
         $prefs = Spot::all();
+
         // dd($prefs);
         // spotテーブルから値を取得
-        // all
         // home blade にもっていく
 
         return view('home',[

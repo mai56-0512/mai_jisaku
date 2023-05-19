@@ -5,10 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
-                <a href="{{ route('admin.store') }}">管理者はこちら</a>
+                <div class="card-header">{{ __('administrator Register') }}</div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('admin.store') }}">
                         @csrf
 
                         <div class="form-group row">

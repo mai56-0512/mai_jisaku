@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+<!-- <link href=”https://use.fontawesome.com/releases/v6.0.0/css/all.css” rel=”stylesheet”> -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -20,7 +22,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
+    <div>
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -53,6 +55,15 @@
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
+
+                                <!-- roleカラムが0のユーザだけ実行される処理 -->
+                                @auth
+                                @if (auth()->user()->role === 0)
+                                    <a id="" class="" href="{{ route('admin.index')}}">
+                                        管理者ページ <span class="caret"></span>
+                                    </a>
+                                @endif
+                                @endauth
 
                                 <a id="" class="" href="{{ route('users.index')}}">
                                     マイページ <span class="caret"></span>

@@ -22,6 +22,11 @@ class CreatPost extends Migration
             $table->string('image_path','255')->nullable();
             $table->string('episode','255')->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')
+                    ->references('id')
+                    ->on('users')
+                    ->onDelete('cascade');
         });
     }
 

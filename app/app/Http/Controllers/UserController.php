@@ -20,8 +20,13 @@ class UserController extends Controller
     {
         $id = Auth::id();
         $user = DB::table('posts')->where('user_id',$id)->get();
-        // dd($user);
-        return view('my_page_list',['my_user'=>$user]);
+        $role = Auth::user()->role_id;
+        $account = Auth::user();
+
+        return view('my_page_list',[
+            'my_user'=>$user,
+            'account'=>$account,
+        ]);
     }
 
     /**
@@ -64,7 +69,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        return view()
+        // return view('my_page_list');
     }
 
     /**
@@ -74,9 +79,13 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $account = Auth::user();
+        $account->name = $request->name;
+        $account->email = $request->email;
+        $account->save();
+        return redirect()->route('my_page_list');
     }
 
     /**
@@ -89,4 +98,16 @@ class UserController extends Controller
     {
         //    
     }
+
+    public function badCount(Request $request)
+    {
+
+      $user = User::find($request->user_id);
+      $user->count=$user->count+1;
+      $user->save();
+
+      return redirect()->route('posts.show',$request->spot_id);
+    }
+
+
 }

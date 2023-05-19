@@ -7,8 +7,10 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use App\Mail\ResetPasswordMail;
+use Illuminate\Auth\Notifications\ResetPassword;
 
-class PasswordResetUserNotification extends Notification
+class PasswordResetUserNotification extends ResetPassword
 {
     use Queueable;
 
@@ -30,7 +32,7 @@ class PasswordResetUserNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        // return ['mail'];
     }
 
     /**
@@ -41,10 +43,12 @@ class PasswordResetUserNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+        if (static::$toMailCallback) {
+            return call_user_func(static::$toMailCallback, $notifiable, $this->token);
+        }
+        $url = url(route('reset.password',['token' => $this->token,'email' => $user->email],false));
+        $mail = new ResetPasswordMail($user,$url);
+        return $mail->to($user->email);
     }
 
     /**
