@@ -73,7 +73,7 @@ class PostController extends Controller
     {
 
         $like_model = new Like;
-
+        
         $user_id = Auth::id();
         $from = $request->input('from');
         $until = $request->input('until');
@@ -82,7 +82,7 @@ class PostController extends Controller
         $q = Post::query();
 
         // 全件取得(検索かけなかったら全件表示)
-        $query = $q->withCount('likes')->where('pref_id',$id)->where('user_id', $user_id)
+        $query = $q->withCount('likes')->where('pref_id',$id)
         ->orderBy('date', 'desc');
 
         // 日付検索
@@ -94,6 +94,16 @@ class PostController extends Controller
 
         $post = $query->paginate(5);
 
+        $keyword = $request->input('keyword');
+
+        $query = Post::query()->where('pref_id',$id);
+
+        if(!empty($keyword)) {
+            $post = $query->where('title', 'LIKE', "%{$keyword}%")
+                ->orWhere('city', 'LIKE', "%{$keyword}%")
+                ->get();
+            }
+        
 
         return view('post_list',[
             'all_post'=>$post,
@@ -101,9 +111,28 @@ class PostController extends Controller
             'from'=>$from,
             'until'=>$until,
             'pref_id'=>$id,
-        
-            ]);
+            'keyword'=>$keyword,
+        ]);
 
+    }
+
+    public function keyword(Request $request)
+    {
+        $keyword = $request->input('keyword');
+
+        $query = Post::query();
+
+        if(!empty($keyword)) {
+            $query->where('title', 'LIKE', "%{$keyword}%")
+                ->orWhere('city', 'LIKE', "%{$keyword}%");
+        }
+
+        $posts = $query->get();
+
+        return redirect()->route('posts.show',[
+            'posts'=>$posts,
+            'keyword'=>$keyword,
+        ]);
     }
 
     /**

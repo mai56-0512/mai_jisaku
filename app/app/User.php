@@ -2,11 +2,13 @@
 
 namespace App;
 use Illuminate\Database\Eloquent\Model;
-use App\Notifications\PasswordResetUserNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
+use App\Notifications\ResetPassword;
+
+
 
 class User extends Authenticatable
 {
@@ -18,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','role',
+        'name', 'email', 'password','role','del_flg','count',
     ];
 
     /**
@@ -41,7 +43,7 @@ class User extends Authenticatable
 
     public function sendPasswordResetNotification($token)
     {
-        $this->notify(new PasswordResetUserNotification($token));
+      $this->notify(new ResetPassword($token));
     }
 
     public function posts()
@@ -53,4 +55,5 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Like');
     }
+
 }

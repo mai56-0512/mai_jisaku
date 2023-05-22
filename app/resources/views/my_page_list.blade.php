@@ -2,21 +2,27 @@
 @extends('layouts.app')
 
 @section('content')
+
+<div class="text-center mb-5">
+  <h5>マイページ</h5>
+</div>
+
 <div class="d-flex justify-content-center">
 
-  <form action="{{ route('users.update',$account->id) }}" enctype="multipart/form-data" method="POST" id="new">
-    @method('PUT')
-    @csrf
-
+  
   <!-- ユーザーアイコン表示 -->
-  <div class=text-center>
+  <div class=text-left>
     @if(Auth::user()->image_path == null)
-      <img src="{{ asset('/storage/icons/noimage.png') }}" width="75%">
+    <img src="{{ asset('/storage/icons/noimage.png') }}" width="75%">
     @else
-      <img src="{{ asset('/storage/icons/'.Auth::user()->image_path) }}" width="75%">
+    <img src="{{ asset('/storage/icons/'.Auth::user()->image_path) }}" width="75%">
     @endif
   </div>
+  
+<div class="w-25">
 
+  <form action="{{ route('users.update',$account->id) }}" enctype="multipart/form-data" method="GET" id="new">
+    @csrf
           <div class="form-group">
             <label for="subject">
             ユーザー名
@@ -42,9 +48,14 @@
             >
           </div>
           <div class="text-center mb-5">
-            <input type="submit" value="変更" class="btn btn-outline-primary">
+            <!-- <input type="submit" value="変更" class="btn btn-outline-primary"> -->
           </div>
   </form>
+</div>
+</div>
+
+<div class="text-center mb-4">
+  <h5>過去の投稿</h5>
 </div>
 
 <div class="row row-cols-1 row-cols-md-4 g-4 w-75">

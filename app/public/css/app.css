@@ -11448,3 +11448,17 @@ a.text-dark:focus {
   color: red !important;
 }
 
+
+#kanrisya {
+  color:#6c757d;
+  margin-right: 15px;
+}
+
+#mypage {
+  color:#38c172;
+}
+
+#navbarDropdown {
+  color:#38c172;
+  margin-left: 100px;
+}

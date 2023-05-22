@@ -3,7 +3,12 @@
 @section('content')
 <!-- 都道府県の投稿一覧 -->
 
-
+<div class="text-center">
+  <form action="{{ route('posts.show',$pref_id) }}" method="GET">
+    <input type="text" placeholder="キーワードを入力" name="keyword" value="{{ $keyword }}">
+    <input type="submit" value="検索">
+  </form>
+</div>
 
 <form action="{{ route('posts.show',$pref_id) }}" enctype="multipart/form-data" method="GET" id="new">
   <div class="text-center mb-2">
@@ -14,12 +19,6 @@
   </div>
 </form>
 
-<div class="text-center mb-5">
-  <form action="" method="GET">
-    <input type="text" name="keyword" placeholder="キーワード検索" value="">
-    <button type="submit" >検索</button>
-  </form>
-</div>
 
 <div class="row row-cols-1 row-cols-md-4 g-4 w-75">
 @foreach($all_post as $userposts)
@@ -27,6 +26,7 @@
     <div class="card h-60 w-60">
       <img src="{{ asset('storage/images/'.$userposts->image_path) }}" class="card-img-top" alt="...">
       <div class="card-body">
+        <p class="card-text">{{ $userposts->name }}</p>
         <p class="card-text">{{ $userposts->date }}</p>
         <h5 class="card-title">{{ $userposts->title }}</h5>
         <p class="card-text">{{ $userposts->episode }}</p>

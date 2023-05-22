@@ -296,6 +296,7 @@
 	@endif
 </div>
 
+@if(Auth::user()->del_flg === 0)
 <div class="row justify-content-center" >
   <div class="w-50 border p-4">
     <h1 class="text-center h4 mb-1 fw-normal">新規作成</h1>
@@ -400,7 +401,9 @@
 
       </fieldset>
     </form>
+
   </div>
 </div>
+@endif
 
 @endsection

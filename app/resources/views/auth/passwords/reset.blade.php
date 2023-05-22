@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Reset Password') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('password.update') }}">
+                    <form method="POST" action="{{ route('password.reset', $token) }}">
                         @csrf
 
                         <input type="hidden" name="token" value="{{ $token }}">
@@ -63,14 +63,3 @@
     </div>
 </div>
 @endsection
-
-{{ $user->name}} 様
-
-<br>
-パスワード変更のご案内<br>
-次のURLよりパスワードの設定を行ってログインをお願い致します。<br>
-<br>
-パスワード設定URL<br>
-{{ $url }}
-<br>
----------------------------

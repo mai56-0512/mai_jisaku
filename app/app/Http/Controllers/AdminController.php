@@ -33,7 +33,7 @@ class AdminController extends Controller
 
     public function index()
     {
-        $user = DB::table('users')->where('role',1)->get();
+        $user = DB::table('users')->where('role',1)->orderBy('count','desc')->get();
 
         return view('admin',[
             'user_list'=>$user,

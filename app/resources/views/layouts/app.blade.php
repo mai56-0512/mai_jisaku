@@ -9,7 +9,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ ('Travel note') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -26,7 +26,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ ('Travel note') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -59,13 +59,13 @@
                                 <!-- roleカラムが0のユーザだけ実行される処理 -->
                                 @auth
                                 @if (auth()->user()->role === 0)
-                                    <a id="" class="" href="{{ route('admin.index')}}">
+                                    <a id="kanrisya" class="" href="{{ route('admin.index')}}">
                                         管理者ページ <span class="caret"></span>
                                     </a>
                                 @endif
                                 @endauth
 
-                                <a id="" class="" href="{{ route('users.index')}}">
+                                <a id="mypage" class="" href="{{ route('users.index')}}">
                                     マイページ <span class="caret"></span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

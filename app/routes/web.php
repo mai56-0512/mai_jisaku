@@ -14,13 +14,15 @@
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/reset/{token}', 'Auth\ResetPasswordController@reset');
+
+Route::get('/', 'HomeController@index')->name('home');
 Route::resource('users', 'UserController');
 Route::resource('posts', 'PostController');
 Route::resource('admins','AdminController');
@@ -45,3 +47,11 @@ Route::get('/my_page_list','UserController@update')->name('my_page_list');
 Route::post('/userupdate','UserController@update')->name('user.update');
 
 Route::post('/badcount','UserController@badCount')->name('users.badCount');
+
+Route::post('/user_stop','UserController@stop')->name('users.stop');
+Route::get('/user_stop','AdminController@index')->name('admin.index');
+
+Route::get('/keyword','PostController@keyword')->name('posts.keyword');
+
+
+

@@ -69,7 +69,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        // return view('my_page_list');
+        return redirect()->route('users.update');
     }
 
     /**
@@ -82,10 +82,15 @@ class UserController extends Controller
     public function update(Request $request)
     {
         $account = Auth::user();
+        dd($account);
+
         $account->name = $request->name;
         $account->email = $request->email;
+        
         $account->save();
-        return redirect()->route('my_page_list');
+        return view('my_page_list',[
+            'account'=>$account,
+        ]);
     }
 
     /**
@@ -109,5 +114,13 @@ class UserController extends Controller
       return redirect()->route('posts.show',$request->spot_id);
     }
 
+    public function stop(Request $request)
+    {
+        $user = User::find($request->user_id);
+        $user->del_flg = 1;
+        $user->save();
+
+        return redirect()->route('admin.index');
+    }
 
 }

@@ -9,6 +9,8 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use App\Mail\ResetPasswordMail;
 use Illuminate\Auth\Notifications\ResetPassword;
+use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Mail;
 
 class PasswordResetUserNotification extends ResetPassword
 {
@@ -41,12 +43,12 @@ class PasswordResetUserNotification extends ResetPassword
      * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail($notifiable)
+    public function toMail($user)
     {
         if (static::$toMailCallback) {
             return call_user_func(static::$toMailCallback, $notifiable, $this->token);
         }
-        $url = url(route('reset.password',['token' => $this->token,'email' => $user->email],false));
+        $url = url(route('password.reset',['token' => $this->token,'email' => $user->email],false));
         $mail = new ResetPasswordMail($user,$url);
         return $mail->to($user->email);
     }
