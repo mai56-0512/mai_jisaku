@@ -11,7 +11,7 @@
 </div>
 
 <form action="{{ route('posts.show',$pref_id) }}" enctype="multipart/form-data" method="GET" id="new">
-  <div class="text-center mb-2">
+  <div class="text-center mb-4">
       <input type="date" name="from" placeholder="from_date" value="{{ $from ?? '' }}">
       <span class="mx-3">~</span>
       <input type="date" name="until" placeholder="until_date" value="{{ $until ?? '' }}">
@@ -20,10 +20,11 @@
 </form>
 
 
-<div class="row row-cols-1 row-cols-md-4 g-4 w-75">
+
+<div class="row row-cols-4 w-75 mx-auto">
 @foreach($all_post as $userposts)
-  <div class="col">
-    <div class="card h-60 w-60">
+  <div class="col mb-5"> 
+    <div class="card h-100">
       <img src="{{ asset('storage/images/'.$userposts->image_path) }}" class="card-img-top" alt="...">
       <div class="card-body">
         <p class="card-text">{{ $userposts->name }}</p>
@@ -31,30 +32,26 @@
         <h5 class="card-title">{{ $userposts->title }}</h5>
         <p class="card-text">{{ $userposts->episode }}</p>
         <p class="card-text">{{ $userposts->city }}</p>
-        <p class="card-text">{{ $userposts->spot_id }}</p>
-
+      </div>
         @if($like_model->like_exist(Auth::user()->id,$userposts->id))
-        <p class="favorite-marke text-right">
+        <p class="favorite-marke text-right mr-3">
           <a class="js-like-toggle loved" href="" data-postid="{{ $userposts->id }}">
           <i class="far fa-heart"></i></a>
-          <span class="likesCount">{{$userposts->likes_count}}</span>
-        </p>
+          <span class="likesCount">{{$userposts->likes_count}}</span></p>
         @else
-        <p class="favorite-marke text-right">
+        <p class="favorite-marke text-right mr-3">
           <a class="js-like-toggle" href="" data-postid="{{ $userposts->id }}"><i class="fas fa-heart"></i></a>
           <span class="likesCount">{{$userposts->likes_count}}</span>
         </p>
         @endif
-
         <form action="{{ route('users.badCount') }}" method="POST">
           @csrf
           <div class="text-right">
-            <input name="spot_id" type="hidden" value="{{ $userposts->spot_id }}">
+            <input name="pref_id" type="hidden" value="{{ $userposts->pref_id }}">
             <input name="user_id" type="hidden" value="{{ $userposts->user_id }}">
-            <button type="submit" class="btn btn-outline-warning btn-sm">違反報告</button>
+            <button type="submit" class="btn btn-outline-warning btn-sm mr-2">違反報告</button>
           </div>
         </form>
-      </div>
     </div>
   </div>
 

@@ -296,113 +296,102 @@
 	@endif
 </div>
 
+
 @if(Auth::user()->del_flg === 0)
+
 <div class="row justify-content-center" >
-  <div class="w-50 border p-4">
-    <h1 class="text-center h4 mb-1 fw-normal">新規作成</h1>
-
-    <form action="{{ route('posts.store') }}" enctype="multipart/form-data" method="POST" id="new">
-      @csrf
-
-      <fieldset class="mb-4">
-
-      <div class="w-50 p-3 form-group">
-          <label for="subject">
-            日付
-          </label>
-          <input
-            id="name"
-            type="date"
-            name="date"
-            value="{{ old('date') }}"
-            class="form-control"
-          >
-      </div>
-
-      <div class="w-50 p-3 form-group">
-          <label for="subject">
-            タイトル
-          </label>
-          <input
-            id="name"
-            type="text"
-            name="title"
-            value="{{ old('title') }}"
-            class="form-control"
-          >
-      </div>
-
-      <div class="w-auto p-3 form-group">
-          <label for="subject">
-            本文
-          </label>
-          <textarea
-            id="new"
-            name="episode"
-            value="{{ old('episode') }}"
-            class="form-control"
-            rows="8"
-          >
-          </textarea>
-      </div>
-
-      <div class="w-50 form-group">
-          <label for="subject">
-            都道府県
-          </label>
-          <br></br>
-          <select name="pref_id">
-            @foreach ($prefs as $pref)
-            <option value="{{ $pref['id'] }}">{{ $pref['prefectures'] }}</option>
-            @endforeach
-          </select>
-      </div>
-
-      <div class="w-50 p-3 form-group">
-          <label for="subject">
-            市区町村
-          </label>
-          <input
-            id="name"
-            type="text"
-            name="city"
-            value="{{ old('city') }}"
-            class="form-control"
-          >
-      </div>
-
-      <div class="w-50 p-3 form-group">
-          <label for="subject">
-            スポット
-          </label>
-          <input
-            type="text"
-            name="spot_id"
-            value="{{ old('spot_id') }}"
-            class="form-control"
-          >
-      </div>
-
-      <div class="p-3 form-group">
-          <label for="exampleInputFile">
-            画像
-          </label><br></br>
-          <input
-            id="image"
-            type='file'
-            name="image_path"
-          >
-      </div>
-        <div class="text-center">
-          <button type="submit" class="text-center btn btn-outline-primary">
-            投稿する
-          </button>
-        </div>
-
-      </fieldset>
-    </form>
-
-  </div>
+		<div class="w-50 border p-4 bg-light">
+	
+			<h1 class="text-center h4 mb-1 fw-normal">新規作成</h1>
+		
+			<form action="{{ route('posts.store') }}" enctype="multipart/form-data" method="POST" id="new">
+			  @csrf
+		
+			  <fieldset class="mb-4">
+		
+			  <div class="w-50 p-3 form-group">
+				  <label for="subject">
+					日付
+				  </label>
+				  <input
+					id="name"
+					type="date"
+					name="date"
+					value="{{ old('date') }}"
+					class="form-control"
+				  >
+			  </div>
+		
+			  <div class="w-50 p-3 form-group">
+				  <label for="subject">
+					タイトル
+				  </label>
+				  <input
+					id="name"
+					type="text"
+					name="title"
+					value="{{ old('title') }}"
+					class="form-control"
+				  >
+			  </div>
+		
+			  <div class="w-auto p-3 form-group">
+				  <label for="subject">
+					本文
+				  </label>
+				  <textarea
+					id="new"
+					name="episode"
+					value="{{ old('episode') }}"
+					class="form-control"
+					rows="8"></textarea>
+			  </div>
+		
+			  <div class="p-3 form-group">
+				<label for="subject">
+					都道府県
+					</label>
+					<br></br>
+					<select name="pref_id" class="pull">
+					  @foreach ($prefs as $pref)
+					  <option value="{{ $pref['id'] }}">{{ $pref['prefectures'] }}</option>
+					  @endforeach
+					</select>
+			  </div>
+		
+			  <div class="w-50 p-3 form-group">
+				  <label for="subject">
+					市区町村
+				  </label>
+				  <input
+					id="name"
+					type="text"
+					name="city"
+					value="{{ old('city') }}"
+					class="form-control"
+				  >
+			  </div>
+		
+			  <div class="p-3 form-group">
+				  <label for="exampleInputFile">
+					画像
+				  </label><br></br>
+				  <input
+					id="image"
+					type='file'
+					name="image_path"
+				  >
+			  </div>
+				<div class="text-center">
+				  <button type="submit" class="text-center btn btn-outline-primary">
+					投稿する
+				  </button>
+				</div>
+		
+			  </fieldset>
+			</form>
+	
+	</div>
 </div>
 @endif
 

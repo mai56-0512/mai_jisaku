@@ -24,11 +24,7 @@ class CreateData extends FormRequest
     public function rules()
     {
         return [
-            'title'=>'required|max:50',
-            'date'=>'required|date',
-            'episode'=>'max:255',
-            'city'=>'required|max:50',
-            'spot_id'=>'required',
+            
         ];
     }
 }

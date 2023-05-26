@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Post;
 use App\Spot;
 use App\User;
+use App\Http\Requests\CreateData;
 
 class UserController extends Controller
 {
@@ -79,18 +80,18 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(CreateData $request)
     {
+        $request->validate([
+            'name'=>'required|max:20',
+        ]);
+
         $account = Auth::user();
-        dd($account);
 
         $account->name = $request->name;
-        $account->email = $request->email;
         
         $account->save();
-        return view('my_page_list',[
-            'account'=>$account,
-        ]);
+        return redirect()->route('users.index');
     }
 
     /**
@@ -111,7 +112,7 @@ class UserController extends Controller
       $user->count=$user->count+1;
       $user->save();
 
-      return redirect()->route('posts.show',$request->spot_id);
+      return redirect()->route('posts.show',$request->pref_id);
     }
 
     public function stop(Request $request)

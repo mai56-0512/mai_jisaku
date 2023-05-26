@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    protected $fillable = ['user_id','spot_id','title','date','image_path','episode','city','count','del_flg'];
+    protected $fillable = ['user_id','title','date','image_path','episode','city','count','del_flg'];
 
     public function likes()
     {

@@ -20,11 +20,11 @@
       @csrf
       @method('patch')
   <div class="row justify-content-center">
-    <div class="w-50 border p-4">
+    <div class="w-50 border p-4 bg-light">
       <fieldset class="mb-4">
       <h1 class="text-center h4 mb-1 fw-normal">投稿編集</h1>
 
-      <div class="w-25 p-3 form-group">
+      <div class="w-50 p-3 form-group">
           <label for="subject">
             日付
           </label>
@@ -55,21 +55,19 @@
             本文
           </label>
           <textarea
-            id="new"
+            id="name"
             name="episode"
-            value="{{ $post->episode }}"
             class="form-control"
             rows="8"
-          >
-          </textarea>
+          >{{ $post->episode }}</textarea>
         </div>
 
         <div class="p-3 form-group">
           <label for="subject">
-            都道府県、市町村
+            都道府県
           </label>
           <br></br>
-          <select name="spot_id">
+          <select name="spot_id" class="pull">
             @foreach ($prefs as $pref)
             <option value="{{ $pref['id'] }}">{{ $pref['prefectures'] }} {{ $pref['city'] }}</option>
             @endforeach
@@ -89,22 +87,10 @@
           >
       </div>
 
-        <div class="w-50 p-3 form-group">
-          <label for="subject">
-            スポット
-          </label>
-          <input
-            type="text"
-            name="spot_id"
-            value="{{ $post->spot_id }}"
-            class="form-control"
-          >       
-        </div>
-
         <div class="p-3 form-group">
           <label for="exampleInputFile">
             画像
-          </label>
+          </label><br></br>
           <input
             id="image"
             type='file'

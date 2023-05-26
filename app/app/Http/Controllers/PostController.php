@@ -46,11 +46,16 @@ class PostController extends Controller
     {
         $posts = new Post;
 
+        $request->validate([
+            'title'=>'required|max:50',
+            'date'=>'required|date',
+            'city'=>'required|max:20',
+        ]);
+
         $file_name = $request->file('image_path')->getClientOriginalName();
         $request->file('image_path')->storeAs('public/images', $file_name);
 
         $posts->user_id = Auth::id();
-        $posts->spot_id = $request->spot_id;
         $posts->title = $request->title;
         $posts->date = $request->date;
         $posts->pref_id = $request->pref_id;
@@ -161,12 +166,17 @@ class PostController extends Controller
      */
     public function update(CreateData $request, $id)
     {
+        $request->validate([
+            'title'=>'required|max:50',
+            'date'=>'required|date',
+            'city'=>'required|max:20',
+        ]);
+
         //更新処理
         $post = Post::find($id);
         $post->date = $request->date;
         $post->title = $request->title;
         $post->city = $request->city;
-        $post->spot_id = $request->spot_id;
         $post->episode = $request->episode;
         $post->save();
         

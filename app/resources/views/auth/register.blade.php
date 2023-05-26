@@ -5,8 +5,11 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
-                <a href="{{ route('admin.store') }}">管理者はこちら</a>
+                <div class="card-header text-center">{{ __('新規登録') }}
+                    <div class="text-right">
+                        <a href="{{ route('admin.store') }}">管理者はこちら</a>
+                    </div>
+                </div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
@@ -52,7 +55,6 @@
                                 @enderror
                             </div>
                         </div>
-
                         <div class="form-group row">
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
 
